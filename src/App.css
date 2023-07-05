@@ -1,38 +1,180 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+*{
+    margin: 0;
+    padding: 0;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  body{
+    user-select:none;
   }
-  to {
-    transform: rotate(360deg);
+  .container{
+    width: 100vw;
+    max-width: 100%;
+    height: 100dvh;
+    min-height:500px;
+    position: relative;
+    transition:.2s linear;
+    position:relative;
+    margin:auto;
   }
-}
+  .board{
+    display: grid;
+    grid-template-columns:repeat(3,90px);
+    grid-template-rows:repeat(3,90px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+  }
+  .box{
+    width:100%;
+    height: 100%;
+    border:3px solid #aaa;
+    box-sizing: border-box;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .box:nth-child(1){
+    border-width:0 3px 3px 0;
+  }
+  .box:nth-child(2){
+    border-top-width:0;
+  }
+  .box:nth-child(3){
+    border-width:0 0 3px 3px;
+  }
+  .box:nth-child(4){
+    border-left-width:0;
+  }
+  .box:nth-child(6){
+    border-right-width:0;
+  }
+  .box:nth-child(7){
+    border-width:3px 3px 0 0;
+  }
+  .box:nth-child(8){
+    border-bottom-width:0;
+  }
+  .box:nth-child(9){
+    border-width:3px 0 0 3px;
+  }
+  .box svg .xo{
+    stroke: #444;
+    transition:.2s linear;
+  }
+  .box svg{
+    width: 80%;
+    height: 80%;
+    animation:in .1s linear;
+  }
+  .box.win svg .xo{
+   stroke: green;
+  }
+  @keyframes in{
+    0%{
+      transform: scale(0.5);
+    }
+    100%{
+      transform: scale(1);
+    }
+  }
+  .score{
+    width: 100%;
+    height:90px;
+    font-family: 'Belanosima', sans-serif;
+    color:#555;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    position: absolute;
+    transition:.2s linear;
+  }
+  .score.now{
+    background:#555;
+    color: white;
+  }
+  .score.x{
+    bottom: 0;
+  }
+  .score.o{
+    top: 0;
+    transform: rotate(180deg);
+  }
+  .restart-btn{
+    position: absolute;
+    top: 105px;
+    right: 15px;
+    background: transparent;
+    border:none;
+  }
+  .restart-btn svg{
+    width: 30px;
+    height: 30px;
+    color: #999;
+  }
+  .toggle-btn{
+    position: absolute;
+    top: 105px;
+    right: 60px;
+    border:none;
+    background: transparent;
+  }
+  .toggle-btn svg{
+    width: 30px;
+    height: 30px;
+    color:#999;
+  }
+  /*Dark theme*/
+  .dark{
+    background: #222;
+  }
+  .dark .box{
+   border-color:#555;
+  }
+  .dark .box svg .xo{
+    stroke:#aaa;
+  }
+  .dark .box.win svg .xo{
+    stroke:green;
+  }
+  .dark .score{
+    color:#ddd;
+  }
+  .dark .score.now{
+    color:#ddd;
+  }
+  /*Large screen*/
+  @media screen and (min-width: 1000px) {
+    .score{
+      width:50%;
+      height:120px;
+      font-size:40px;
+    }
+    .score.o{
+      top:calc(100% - 120px);
+      right:0;
+      transform:rotate(0deg);
+    }
+    .restart-btn{
+      top: 25px;
+      right: 25px;
+    }
+    .restart-btn svg{
+      width: 35px;
+      height: 35px;
+    }
+    .toggle-btn{
+      top: 25px;
+      right: 75px;
+    }
+    .toggle-btn svg{
+      width: 35px;
+      height: 35px;
+    }
+    .board{
+      grid-template-columns:repeat(3,110px);
+      grid-template-rows:repeat(3,110px);
+      transform:translate(-50%,calc(-50% - 60px));
+    }
+
+  }
